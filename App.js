@@ -20,7 +20,6 @@ const App = () => {
         </Link>
       </View>
     </View> */}
-
         <Route exact path="/" component={LoginScreen} />
         <Route path="/signup" component={SignupScreen} />
       </NativeRouter>
