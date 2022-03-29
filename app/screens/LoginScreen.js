@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
@@ -9,10 +9,21 @@ import {
   Image,
 } from "react-native";
 import { Link } from "react-router-native";
+import { StateContext } from "../state/State";
 
 function LoginScreen(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const { isLoggedIn, dispatch } = useContext(StateContext);
+
+  const handleLogin = () => {
+    dispatch({
+      type: "ADD_MULTIPLE",
+      payload: true,
+      context: "isLoggedIn",
+    });
+  };
 
   return (
     <View style={styles.container}>

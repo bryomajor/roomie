@@ -5,20 +5,27 @@ import { NativeRouter, Route, Link } from "react-router-native";
 import LoginScreen from "./app/screens/LoginScreen";
 import SignupScreen from "./app/screens/SignupScreen";
 
-const App = () => (
-  <NativeRouter>
-    {/* <View style={styles.container}>
+import { useReducer } from "react";
+import { StateContext, reducer, initialState } from "./app/state/State";
+
+const App = () => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  return (
+    <StateContext value={{ ...state, dispatch }}>
+      <NativeRouter>
+        {/* <View style={styles.container}>
       <View style={styles.nav}>
         <Link to="/" underlayColor="#f0f4f7" style={styles.navItem}>
           <Text>Login</Text>
         </Link>
       </View>
     </View> */}
-
-    <Route exact path="/" component={LoginScreen} />
-    <Route path="/signup" component={SignupScreen} />
-  </NativeRouter>
-);
+        <Route exact path="/" component={LoginScreen} />
+        <Route path="/signup" component={SignupScreen} />
+      </NativeRouter>
+    </StateContext>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
